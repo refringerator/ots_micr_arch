@@ -9,3 +9,14 @@
     
 Cобрать локально образ приложения в докер.
 Запушить образ в dockerhub
+
+### Description
+Simple shell web server created using `nc`
+Image can be found on [DockerHub](https://hub.docker.com/r/refringerator/simple-server/tags)
+
+### How to run
+```shell
+docker run --rm -p 8000:8000 refringerator/simple-server
+```
+
+
