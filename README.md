@@ -1,23 +1,9 @@
 # Otus Microservice Architecture course
-## hw Docker
+## hw k8s basic
 
-Создать минимальный сервис, который
-1.  отвечает на порту 8000
-2.  имеет http-метод
-    GET /health/
-    RESPONSE: {"status": "OK"}
-    
-Cобрать локально образ приложения в докер.
-Запушить образ в dockerhub
-
-### Description
-Simple shell web server created using `nc`
-
-Image can be found on [DockerHub](https://hub.docker.com/r/refringerator/simple-server/tags)
-
-### How to run
-```shell
-docker run --rm -p 8000:8000 refringerator/simple-server
-```
-
-
+### TODO
+Написать манифесты для деплоя в k8s для этого сервиса.
+Манифесты должны описывать сущности Deployment, Service, Ingress.
+В Deployment могут быть указаны Liveness, Readiness пробы.
+Количество реплик должно быть не меньше 2. Image контейнера должен быть указан с Dockerhub.
+Хост в ингрессе должен быть arch.homework. В итоге после применения манифестов GET запрос на http://arch.homework/health должен отдавать {“status”: “OK”}.   
