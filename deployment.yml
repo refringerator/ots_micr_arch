@@ -25,6 +25,14 @@ spec:
             command:
               - sh 
               - -c
+              - \[ $(pidof nc) -lt 100 \]
+          initialDelaySeconds: 25
+          periodSeconds: 25
+        readinessProbe:
+          exec:
+            command:
+              - sh 
+              - -c
               - ps -o comm | grep -q nc
           initialDelaySeconds: 5
           periodSeconds: 5
