@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: cool-service 
 spec:
+  type: NodePort
   selector:
     app: simple-server
   ports:
