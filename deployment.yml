@@ -25,7 +25,7 @@ spec:
             command:
               - sh 
               - -c
-              - \[ $(pidof nc) -lt 100 \]
+              - \[ $(pidof nc) -gt 50 \]
           initialDelaySeconds: 25
           periodSeconds: 25
         readinessProbe:
