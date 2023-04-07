@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
 from api.db import Base
 
 
@@ -9,9 +8,13 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(256))
     email = Column(String(50))
-    firstName = Column(String)
+    first_name = Column(String)
+    last_name = Column(String)
+    phone = Column(String(50))
 
-    def __init__(self, username, email, firstName, *args, **kwargs):
+    def __init__(self, username, email, first_name, last_name, phone, *args, **kwargs):
         self.username = username
         self.email = email
-        self.firstName = firstName
+        self.first_name = first_name
+        self.last_name = last_name
+        self.phone = phone

@@ -5,7 +5,9 @@ from sqlalchemy.orm import sessionmaker
 from . import config
 
 
-SQLALCHEMY_DB_URL = f"postgresql://{config.DATABASE_USERNAME}:{config.DATABASE_PASSWORD}@{config.DATABASE_HOST}/{config.DATABASE_NAME}"
+SQLALCHEMY_DB_URL = (
+    f"postgresql://{config.DATABASE_USERNAME}:{config.DATABASE_PASSWORD}@{config.DATABASE_HOST}/{config.DATABASE_NAME}"
+)
 
 engine = create_engine(SQLALCHEMY_DB_URL)
 
@@ -21,5 +23,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
-

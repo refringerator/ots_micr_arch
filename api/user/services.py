@@ -7,4 +7,3 @@ async def new_user_register(request, database) -> models.User:
     database.commit()
     database.refresh(new_user)
     return new_user
-
