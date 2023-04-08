@@ -29,3 +29,8 @@ async def get_user_by_id(user_id: int, database: Session = Depends(db.get_db)):
 @router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
 async def delete_user_by_id(user_id: int, database: Session = Depends(db.get_db)):
     return await services.delete_user_by_id(user_id, database)
+
+
+@router.put("/{user_id}", status_code=status.HTTP_200_OK, response_model=schema.DisplayUser)
+async def update_user_by_id(request: schema.User, user_id: int, database: Session = Depends(db.get_db)):
+    return await services.update_user_by_id(request, user_id, database)

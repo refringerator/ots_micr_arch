@@ -18,3 +18,9 @@ class User(Base):
         self.first_name = first_name
         self.last_name = last_name
         self.phone = phone
+
+    def data_update(self, *args, **kwargs):
+        print(kwargs)
+        for attr, value in kwargs.items():
+            if hasattr(self, attr):
+                setattr(self, attr, value)
