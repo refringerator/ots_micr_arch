@@ -10,7 +10,7 @@ from . import services
 router = APIRouter(tags=["Users"], prefix="/user")
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schema.DisplayUser)
 async def create_user_registration(request: schema.User, database: Session = Depends(db.get_db)):
     user = await validator.verify_email_exist(request.email, database)
 
