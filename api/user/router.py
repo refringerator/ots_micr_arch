@@ -19,3 +19,8 @@ async def create_user_registration(request: schema.User, database: Session = Dep
 
     new_user = await services.new_user_register(request, database)
     return new_user
+
+
+@router.get("/{user_id}", response_model=schema.DisplayUser)
+async def get_user_by_id(user_id: int, database: Session = Depends(db.get_db)):
+    return await services.get_user_by_id(user_id, database)
