@@ -20,7 +20,6 @@ class User(Base):
         self.phone = phone
 
     def data_update(self, *args, **kwargs):
-        print(kwargs)
         for attr, value in kwargs.items():
             if hasattr(self, attr):
                 setattr(self, attr, value)
