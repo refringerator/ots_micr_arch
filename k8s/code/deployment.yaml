@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  crud-deployment
+  namespace: fastapi-project
+  labels:
+    app:  crud-app
+spec:
+  selector:
+    matchLabels:
+      app: crud-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app:  crud-app
+    spec:
+      initContainers:
+        - name: init-postgres-service
+          image: postgres:15.2
+          command: ['sh', '-c', 'until pg_isready -h postgres-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local -p 5432; do echo waiting for database; sleep 2; done;']
+
+      containers:
+      - name:  crud-sample-container
+        image:  refringerator/fastapi:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 300m
+            memory: 1Gi
+        livenessProbe:
+          httpGet:
+            port: 5000
+            path: /docs
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /docs
+            port: 5000
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        envFrom:
+        - secretRef:
+            name: fastapi-secret
+        ports:
+        - containerPort:  5000
+          name:  crud-fastapi
+      restartPolicy: Always
