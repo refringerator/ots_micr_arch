@@ -24,6 +24,7 @@ Ingress-ы должны также вести на url arch.homework/
 #### Run app
 ```shell
 minikube start --mount-string "$HOME/postgres-data:/data" --driver=docker --install-addons=true --kubernetes-version=stable
+minikube tunnel
 
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
