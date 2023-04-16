@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     app: crud-app
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 5000
       targetPort: 5000
